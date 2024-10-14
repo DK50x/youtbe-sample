@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Inter } from 'next/font/google';
+import { ThemeProvider } from "@/components/theme-provider"
+import LeftNav from "@/components/LeftNav";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,11 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className={`bg-gray-900 text-gray-800 ${inter.className}`}>
+    <body className="flex  ">
+      <main className="flex-grow"> 
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+          >
+            {children}
+        </ThemeProvider>
+        </main>
       </body>
     </html>
   );
